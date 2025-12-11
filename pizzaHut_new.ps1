@@ -47,7 +47,11 @@ Write-Log "Backup folder created: $folderPath"
 
 # Backup each database
 foreach ($db in $databases) {
-    $backupPath = "$folderPath\${db}_${backupType}_$timestamp.bak"
+
+    # UPDATED: Backup name begins with backup type
+    $backupName = "${backupType}_${db}_${timestamp}.bak"
+    $backupPath = "$folderPath\$backupName"
+
     Write-Log "Starting backup for database: $db → $backupPath"
 
     $sql = @"
@@ -65,10 +69,11 @@ foreach ($db in $databases) {
     }
 }
 
-# Compress to RAR file
-$rarFilePath = "C:\SQL_Backup\$backupType\${date}_${backupType}.rar"
+# UPDATED: RAR file name starts with backup type
+$rarFilePath = "C:\SQL_Backup\$backupType\${backupType}_${date}.rar"
 
 if (Test-Path $rarPath) {
+
     Write-Log "Compressing backup folder to RAR: $rarFilePath"
 
     Start-Process -FilePath $rarPath -ArgumentList "a -r `"$rarFilePath`" `"$folderPath\*.*`"" -Wait -NoNewWindow
