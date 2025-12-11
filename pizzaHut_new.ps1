@@ -4,9 +4,9 @@
 
 # Parameters
 $server = "localhost"                     # Adjust if needed
-$databases = "dba.stackexchange.com"
+$databases = "test"
 $rarPath = "C:\Program Files\WinRAR\rar.exe"
-$obsutilPath = "C:\Users\Administrator\Downloads\obsutil_windows_amd64_5.7.3\obsutil.exe"   # Adjust if obsutil installed elsewhere
+$obsutilPath = "C:\Program Files\obsutil\obsutil.exe"   # Adjust if obsutil installed elsewhere
 
 # Determine backup type
 $today = Get-Date
@@ -61,3 +61,4 @@ if (Test-Path $rarPath) {
 } else {
     Write-Host "WinRAR not found at $rarPath. Please install or update the path."
 }
+
